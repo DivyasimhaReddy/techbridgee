@@ -20,6 +20,27 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const express = require("express");
+const cors = require("cors");
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+// ✅ CORS middleware
+app.use(
+  cors({
+    origin: "https://your-frontend-name.vercel.app", // <-- Replace this with your actual Vercel frontend URL
+    credentials: true,
+  })
+);
+
+// ✅ Body parser
+app.use(express.json());
+
+// ✅ Your routes
+app.use("/api/auth", require("./routes/auth"));
+
+
 // Security middleware
 app.use(helmet());
 app.use(cors({
